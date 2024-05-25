@@ -167,9 +167,8 @@ const deleteEmployeeById = async (req, res) => {
   }
 };
 
-// Controller to get an employee's details by their own ID
+// Controller to get own employee's details by their own ID
 const getEmployeeDetailsByOwnId = async (req, res) => {
-
   try {
     // Fetch the employee details by their own ID
     const employee = await Employee.findById(req.params.id);
@@ -180,7 +179,20 @@ const getEmployeeDetailsByOwnId = async (req, res) => {
 
     // Check if the authenticated user is authorized to access the employee details
     if (req.params.id !== req.user.id) {
-      return res.status(403).json({ error: "You are not authorized to access this employee's details" });
+      return res
+        .status(403)
+        .json({
+          error: "You are not authorized to access this employee's details",
+        });
+    }
+
+    // Decrypt the fetched password if it exists
+    if (employee.password) {
+      const decryptedPassword = CryptoJS.AES.decrypt(
+        employee.password,
+        process.env.PASSWORD_SECRET
+      ).toString(CryptoJS.enc.Utf8);
+      employee.password = decryptedPassword;
     }
 
     // Return the employee details
