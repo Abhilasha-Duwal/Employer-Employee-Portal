@@ -61,6 +61,7 @@ const registerEmployee = async (req, res) => {
     email,
     password,
     address,
+    mobile,
     annualSalary,
     jobTitle,
     userRole,
@@ -77,7 +78,7 @@ const registerEmployee = async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    const newEmployee = new User({
+    const newEmployee = new Employee({
       username,
       email,
       password: CryptoJS.AES.encrypt(
@@ -85,6 +86,7 @@ const registerEmployee = async (req, res) => {
         process.env.PASSWORD_SECRET
       ).toString(),
       address,
+      mobile,
       annualSalary,
       jobTitle,
       userRole,
@@ -93,6 +95,7 @@ const registerEmployee = async (req, res) => {
     const savedUser = await newEmployee.save();
     res.status(201).json(savedUser);
   } catch (err) {
+    console.error("Error registering employee:", err);
     res.status(500).json(err);
   }
 };
