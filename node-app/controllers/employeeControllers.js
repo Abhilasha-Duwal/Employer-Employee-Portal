@@ -127,7 +127,7 @@ const updateOwnDetailByEmployeeById = async (req, res) => {
     }
 
     // Update the user
-    const updatedUser = await User.findByIdAndUpdate(
+    const updatedUser = await Employee.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
       { new: true }
