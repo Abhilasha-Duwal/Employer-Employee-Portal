@@ -8,7 +8,7 @@ const {
 } = require("../middlewares/verifyToken");
 
 // upload list of all employees in Bulk from Excel files.
-router.post('/upload', upload.single('file'), verifyTokenAndEmployer, employeeController.uploadEmployeeController);
+router.post('/upload', upload.single('excelFile'), verifyTokenAndEmployer, employeeController.uploadEmployeeController);
 
 // ADD MORE DETAILS FOR EMPLOYEE
 router.patch("/:id", verifyTokenAndEmployer, employeeController.updateEmployeeToAddMoreDetails);
@@ -16,7 +16,7 @@ router.patch("/:id", verifyTokenAndEmployer, employeeController.updateEmployeeTo
 // Edit EMPLOYEE DETAILS BY ID
 router.put("/find/:id", verifyTokenAndEmployer, employeeController.updateEmployeeDetailsById);
 
-// UPDATE USER AND IF ROLE IS EMPLOYEE UPDATE DETAILS EXCEPT annual salary, job title and user role fields
+// UPDATE USER BY User Itself AND IF ROLE IS EMPLOYEE UPDATE DETAILS EXCEPT annual salary, job title and user role fields
 router.put("/:id", verifyTokenAndAuthorization, employeeController.updateOwnDetailByEmployeeById);
 
 //DELETE USER BY ID
@@ -26,6 +26,6 @@ router.delete("/:id", verifyTokenAndAdminEmployer, employeeController.deleteEmpl
 router.get("/:id", verifyTokenAndAdminEmployer, employeeController.getEmployeeById);
 
 //GET ALL Employees
-router.get("/employees", verifyTokenAndEmployer, employeeController.getAllEmployees);
+router.get("/", verifyTokenAndEmployer, employeeController.getAllEmployees);
 
 module.exports = router;

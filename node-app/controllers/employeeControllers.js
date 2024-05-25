@@ -9,9 +9,18 @@ const uploadEmployeeController = async (req, res) => {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    await employeeUploadQueue.add({ fileBuffer: req.file.buffer });
+    const job = await employeeUploadQueue.add({ fileBuffer: req.file.buffer });
 
-    return res.status(200).json({ message: "File uploaded successfully" });
+    // Wait for the job to complete and get the result
+    const result = await job.finished();
+
+    if (result.errors && result.errors.length > 0) {
+      return res.status(400).json({ errors: result.errors });
+    }
+
+    return res
+      .status(200)
+      .json({ message: result.message || "File uploaded successfully" });
   } catch (error) {
     console.error("Error processing file upload:", error);
     return res.status(500).json({ error: "Internal server error" });

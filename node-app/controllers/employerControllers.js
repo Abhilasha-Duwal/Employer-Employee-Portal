@@ -149,6 +149,7 @@ const getEmployerById = async (req, res) => {
 const getAllEmployers = async (req, res) => {
   const query = req.query.new;
   try {
+    console.log("User making request:", req.user); // Debugging line
     const users = query
       ? await Employer.find().sort({ _id: -1 }).limit(1)
       : await Employer.find();
