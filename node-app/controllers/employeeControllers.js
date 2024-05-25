@@ -92,6 +92,7 @@ const updateOwnDetailByEmployeeById = async (req, res) => {
   try {
     // Fetch the existing user
     const existingUser = await Employee.findById(req.params.id);
+    console.log("Existing User:", existingUser);
 
     if (!existingUser) {
       return res.status(404).json({ error: "User not found" });
@@ -130,14 +131,23 @@ const updateOwnDetailByEmployeeById = async (req, res) => {
     const updatedUser = await Employee.findByIdAndUpdate(
       req.params.id,
       { $set: req.body },
-      { new: true }
+      { new: true, runValidators: true } // Ensure 'new: true' returns the updated document
     );
+    console.log("Updated User:", updatedUser);
+
+    // Check if the updated user is valid
+    if (!updatedUser) {
+      return res.status(500).json({ error: "Failed to update user" });
+    }
 
     // Extract only the updated fields
     const updatedFields = {};
     for (const key in req.body) {
-      updatedFields[key] = updatedUser[key];
+      if (req.body.hasOwnProperty(key)) {
+        updatedFields[key] = updatedUser[key];
+      }
     }
+    console.log("Updated Fields:", updatedFields);
 
     // Create success message
     const fieldNames = Object.keys(updatedFields);
@@ -151,6 +161,7 @@ const updateOwnDetailByEmployeeById = async (req, res) => {
 
     return res.status(200).json({ message: successMessage });
   } catch (err) {
+    console.error("Error during update:", err);
     return res
       .status(500)
       .json({ error: "Internal Server Error", details: err });
@@ -179,11 +190,9 @@ const getEmployeeDetailsByOwnId = async (req, res) => {
 
     // Check if the authenticated user is authorized to access the employee details
     if (req.params.id !== req.user.id) {
-      return res
-        .status(403)
-        .json({
-          error: "You are not authorized to access this employee's details",
-        });
+      return res.status(403).json({
+        error: "You are not authorized to access this employee's details",
+      });
     }
 
     // Decrypt the fetched password if it exists
