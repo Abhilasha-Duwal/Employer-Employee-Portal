@@ -1,0 +1,118 @@
+.loginsignup {
+  padding: 50px;
+}
+.loginsignup-container {
+  width: 70%;
+  background: #fce3fe;
+  margin: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.loginsignup-container h1 {
+  margin: 20px 0px;
+  color: #3cc8b4;
+}
+.loginsignup-fields {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+  position: relative;
+}
+.loginsignup-fields input,
+.register-field input {
+  height: 72px;
+  padding-left: 20px;
+  border: 1px solid #c9c9c9;
+  outline: none;
+  color: #5c5c5c;
+  font-size: 18px;
+}
+.loginsignup-container button {
+  width: 200px;
+  border-radius: 50px;
+  height: 72px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+  background: #ff4141;
+  margin-top: 30px;
+  border: none;
+  font-size: 24px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.loginsignup-login {
+  margin-top: 20px;
+  color: #5c5c5c;
+  font-size: 18px;
+  font-weight: 500;
+}
+.loginsignup-login span {
+  color: #ff4141;
+  font-weight: 600;
+  cursor: pointer;
+}
+.loginsignup-agree {
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+  gap: 20px;
+  color: #5c5c5c;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color:white;
+  background-color: #3cc8b4;
+  width: 50px;
+  padding: 5px;
+  text-align: center;
+  position: absolute;
+  z-index: 2;
+  bottom: 24px;
+  right: 8px;
+}
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.register-fields-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+.register-field {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.file-upload{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+  font-size:30px;
+}
+.upload-image{
+  height:100px;
+  width:100px;
+  align-self: flex-start;
+  cursor: pointer;
+}

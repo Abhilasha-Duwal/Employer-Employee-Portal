@@ -1,0 +1,94 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.button-wrapper {
+  display: flex;
+  gap: 20px;
+  align-self: flex-end;
+}
+.dashboard .dashboard-button {
+  width: 250px;
+  border-radius: 10px;
+  height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+  background: #ff4141;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  align-self: flex-end;
+}
+table {
+  width: 100%;
+  font-size: 20px;
+}
+thead {
+  background-color: #9ab1b1;
+  color: white;
+}
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 15px;
+  text-align: center;
+}
+td:nth-child(2) {
+  text-align: start;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination button {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  color: #333;
+  padding: 10px 20px;
+  margin: 0 2px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination button:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.my-employee-detail{
+  display:flex;
+  gap: 40px;
+  padding:20px;
+  width:100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.detail{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  width:40%;
+  font-size: 25px;
+}
+.loading{
+  text-align: center;
+  padding:10px;
+  font-size: 25px;
+}
