@@ -167,6 +167,29 @@ const deleteEmployeeById = async (req, res) => {
   }
 };
 
+// Controller to get an employee's details by their own ID
+const getEmployeeDetailsByOwnId = async (req, res) => {
+
+  try {
+    // Fetch the employee details by their own ID
+    const employee = await Employee.findById(req.params.id);
+
+    if (!employee) {
+      return res.status(404).json({ error: "Employee not found" });
+    }
+
+    // Check if the authenticated user is authorized to access the employee details
+    if (req.params.id !== req.user.id) {
+      return res.status(403).json({ error: "You are not authorized to access this employee's details" });
+    }
+
+    // Return the employee details
+    res.status(200).json(employee);
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error", details: err });
+  }
+};
+
 //GET USER BY ID
 const getEmployeeById = async (req, res) => {
   try {
@@ -197,6 +220,7 @@ module.exports = {
   updateEmployeeDetailsById,
   updateOwnDetailByEmployeeById,
   deleteEmployeeById,
+  getEmployeeDetailsByOwnId,
   getEmployeeById,
   getAllEmployees,
 };

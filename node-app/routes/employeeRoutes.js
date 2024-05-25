@@ -22,6 +22,9 @@ router.put("/:id", verifyTokenAndAuthorization, employeeController.updateOwnDeta
 //DELETE USER BY ID
 router.delete("/:id", verifyTokenAndAdminEmployer, employeeController.deleteEmployeeById);
 
+//GET own details by own id
+router.get("/me/:id", verifyTokenAndAuthorization, employeeController.getEmployeeDetailsByOwnId);
+
 //GET USER BY ID
 router.get("/:id", verifyTokenAndAdminEmployer, employeeController.getEmployeeById);
 
