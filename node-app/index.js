@@ -19,9 +19,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// setuppassport
-app.use(passport.initialize());
-
 //connection
 connectMongoDb()
   .then(() => console.log("MongoDB connected!!"))
